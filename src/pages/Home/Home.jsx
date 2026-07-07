@@ -13,19 +13,19 @@ export default function Home() {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-2">
                 <div>
-                <h2 className="font-display-lg text-3xl font-bold text-on-surface tracking-tight">
-                    Panel de Control
-                </h2>
-                <p className="text-on-surface-variant mt-1 text-sm">
-                    Resumen general de operaciones de hoy.
-                </p>
+                    <h2 className="font-display-lg text-3xl font-bold text-on-surface tracking-tight">
+                        Panel de Control
+                    </h2>
+                    <p className="text-on-surface-variant mt-1 text-sm">
+                        Resumen general de operaciones de hoy.
+                    </p>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-on-surface-variant bg-surface-container py-2 px-4 rounded-full border border-white/5 w-fit">
-                <span className="material-symbols-outlined text-[16px]">
-                    <FontAwesomeIcon icon={faCalendarDays} />
-                </span>
-                <span>{currentDate}</span>
+                    <span className="material-symbols-outlined text-[16px]">
+                        <FontAwesomeIcon icon={faCalendarDays} />
+                    </span>
+                    <span>{currentDate}</span>
                 </div>
             </div>
 
@@ -69,143 +69,120 @@ export default function Home() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 bg-surface-container-low rounded-xl border border-white/10 flex flex-col overflow-hidden">
-                <div className="p-5 border-b border-white/5 flex justify-between items-center">
-                    <div>
-                    <h3 className="text-lg font-semibold text-on-surface">
-                        Rendimiento de Ventas
-                    </h3>
-                    <p className="text-sm text-on-surface-variant">
-                        Últimos 7 días
-                    </p>
+                    <div className="p-5 border-b border-white/5 flex justify-between items-center">
+                        <div>
+                            <h3 className="text-lg font-semibold text-on-surface">Rendimiento de Ventas</h3>
+                            <p className="text-sm text-on-surface-variant">Últimos 7 día </p>
+                        </div>
+
+                        <button className="text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors cursor-pointer">
+                            Ver Reporte
+                            <span className="material-symbols-outlined text-[16px]">
+                                <FontAwesomeIcon icon={faCaretRight} />
+                            </span>
+                        </button>
                     </div>
 
-                    <button className="text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors cursor-pointer">
-                    Ver Reporte
-                    <span className="material-symbols-outlined text-[16px]">
-                        <FontAwesomeIcon icon={faCaretRight} />
-                    </span>
-                    </button>
-                </div>
+                    <div className="p-5 flex-1 relative min-h-[300px]">
+                        <div className="absolute inset-x-5 inset-y-5 flex items-end gap-2 sm:gap-4">
+                            <div className="h-full flex flex-col justify-between text-xs text-on-surface-variant/50 pr-4 pb-6 font-data-mono border-r border-white/5">
+                                <span>$15k</span>
+                                <span>$10k</span>
+                                <span>$5k</span>
+                                <span>$0</span>
+                            </div>
 
-                <div className="p-5 flex-1 relative min-h-[300px]">
-                    <div className="absolute inset-x-5 inset-y-5 flex items-end gap-2 sm:gap-4">
-                    <div className="h-full flex flex-col justify-between text-xs text-on-surface-variant/50 pr-4 pb-6 font-data-mono border-r border-white/5">
-                        <span>$15k</span>
-                        <span>$10k</span>
-                        <span>$5k</span>
-                        <span>$0</span>
+                            <div className="flex-1 flex items-end justify-around h-full pb-6 relative group">
+                                <div className="w-full flex justify-around items-end h-full z-10">
+                                    <div className="w-8 sm:w-12 h-[40%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Lun</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[65%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Mar</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[45%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Mié</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[80%] bg-primary rounded-t-sm relative cursor-pointer shadow-[0_0_15px_rgba(173,198,255,0.3)]">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-primary font-bold">Jue</div>
+                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface text-xs px-2 py-1 rounded shadow-lg border border-white/10 hidden group-hover:block">$12.4k</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[55%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Vie</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[30%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Sáb</div>
+                                    </div>
+
+                                    <div className="w-8 sm:w-12 h-[20%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">Dom</div>
+                                    </div>
+                                </div>
+
+                                <div className="absolute top-[0%] w-full h-px bg-white/5"></div>
+                                <div className="absolute top-[33%] w-full h-px bg-white/5"></div>
+                                <div className="absolute top-[66%] w-full h-px bg-white/5"></div>
+                                <div className="absolute bottom-6 w-full h-px bg-white/10"></div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="flex-1 flex items-end justify-around h-full pb-6 relative group">
-                        <div className="w-full flex justify-around items-end h-full z-10">
-                        <div className="w-8 sm:w-12 h-[40%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Lun
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[65%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Mar
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[45%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Mié
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[80%] bg-primary rounded-t-sm relative cursor-pointer shadow-[0_0_15px_rgba(173,198,255,0.3)]">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-primary font-bold">
-                            Jue
-                            </div>
-
-                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface text-xs px-2 py-1 rounded shadow-lg border border-white/10 hidden group-hover:block">
-                            $12.4k
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[55%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Vie
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[30%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Sáb
-                            </div>
-                        </div>
-
-                        <div className="w-8 sm:w-12 h-[20%] bg-surface-variant rounded-t-sm hover:bg-primary/40 transition-colors relative cursor-pointer">
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-on-surface-variant">
-                            Dom
-                            </div>
-                        </div>
-                        </div>
-
-                        <div className="absolute top-[0%] w-full h-px bg-white/5"></div>
-                        <div className="absolute top-[33%] w-full h-px bg-white/5"></div>
-                        <div className="absolute top-[66%] w-full h-px bg-white/5"></div>
-                        <div className="absolute bottom-6 w-full h-px bg-white/10"></div>
-                    </div>
-                    </div>
-                </div>
                 </div>
 
                 <div className="bg-surface-container-low rounded-xl border border-white/10 flex flex-col lg:h-[400px]">
-                <div className="p-5 border-b border-white/5 flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-on-surface">
-                    Actividad Reciente
-                    </h3>
+                    <div className="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 className="text-lg font-semibold text-on-surface">Actividad Reciente</h3>
 
-                    <button className="text-on-surface-variant hover:text-primary transition-colors hover:bg-white/5 rounded-md cursor-pointer">
-                    <span className="material-symbols-outlined text-[20px]">
-                        <FontAwesomeIcon icon={faCaretDown} />
-                    </span>
-                    </button>
-                </div>
+                        <button className="text-on-surface-variant hover:text-primary transition-colors hover:bg-white/5 rounded-md cursor-pointer">
+                            <span className="material-symbols-outlined text-[20px]">
+                                <FontAwesomeIcon icon={faCaretDown} />
+                            </span>
+                        </button>
+                    </div>
 
-                <div className="flex-1 overflow-y-auto p-2 space-y-1">
-                    <ActivityItem
-                    icon={faCartPlus}
-                    title="Nueva Venta #INV-4029"
-                    desc="Carlos Mendoza compró 3 items."
-                    time="Hace 5 min"
-                    colorClass="secondary"
-                    />
+                    <div className="flex-1 overflow-y-auto p-2 space-y-1">
+                        <ActivityItem
+                        icon={faCartPlus}
+                        title="Nueva Venta #INV-4029"
+                        desc="Carlos Mendoza compró 3 items."
+                        time="Hace 5 min"
+                        colorClass="secondary"
+                        />
 
-                    <ActivityItem
-                    icon={faTriangleExclamation}
-                    title="Alerta de Stock"
-                    desc="iPhone 15 Pro Max (Black) bajo límite."
-                    time="Hace 22 min"
-                    colorClass="error"
-                    />
+                        <ActivityItem
+                        icon={faTriangleExclamation}
+                        title="Alerta de Stock"
+                        desc="iPhone 15 Pro Max (Black) bajo límite."
+                        time="Hace 22 min"
+                        colorClass="error"
+                        />
 
-                    <ActivityItem
-                    icon={faUserPlus}
-                    title="Nuevo Usuario Registrado"
-                    desc="Ana García (Cajero) agregada al sistema."
-                    time="Hace 1 hora"
-                    colorClass="primary"
-                    />
+                        <ActivityItem
+                        icon={faUserPlus}
+                        title="Nuevo Usuario Registrado"
+                        desc="Ana García (Cajero) agregada al sistema."
+                        time="Hace 1 hora"
+                        colorClass="primary"
+                        />
 
-                    <ActivityItem
-                    icon={faRotate}
-                    title="Sincronización de Catálogo"
-                    desc="Actualización masiva de precios completada."
-                    time="Hace 3 horas"
-                    colorClass="tertiary-container"
-                    />
-                </div>
+                        <ActivityItem
+                        icon={faRotate}
+                        title="Sincronización de Catálogo"
+                        desc="Actualización masiva de precios completada."
+                        time="Hace 3 horas"
+                        colorClass="tertiary-container"
+                        />
+                    </div>
 
-                <div className="p-3 border-t border-white/5 text-center">
-                    <button className="text-primary text-sm font-medium hover:underline cursor-pointer">
-                    Ver todo el historial
-                    </button>
-                </div>
+                    <div className="p-3 border-t border-white/5 text-center">
+                        <button className="text-primary text-sm font-medium hover:underline cursor-pointer">
+                        Ver todo el historial
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

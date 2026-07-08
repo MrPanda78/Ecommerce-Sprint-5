@@ -6,6 +6,7 @@ import Layout from './components/Layout.jsx'
 import Home from './pages/Home/Home.jsx'
 import Products from './pages/Products/Products.jsx'
 import ProductsView from './pages/Products/ProductsView.jsx'
+import Categories from './pages/Categories/Categories.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         {
           path: 'products/:id',
           element: <ProductsView />
+        },
+        {
+          path: 'categories',
+          element: <Categories />
         },
         {
           path: 'profile',

@@ -72,10 +72,10 @@ export default function Home() {
                     <div className="p-5 border-b border-white/5 flex justify-between items-center">
                         <div>
                             <h3 className="text-lg font-semibold text-on-surface">Rendimiento de Ventas</h3>
-                            <p className="text-sm text-on-surface-variant">Últimos 7 día </p>
+                            <p className="text-sm text-on-surface-variant">Últimos 7 días</p>
                         </div>
 
-                        <button className="text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors cursor-pointer">
+                        <button className="text-primary text-xs transition-all duration-300 font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors cursor-pointer">
                             Ver Reporte
                             <span className="material-symbols-outlined text-[16px]">
                                 <FontAwesomeIcon icon={faCaretRight} />
@@ -137,7 +137,7 @@ export default function Home() {
                     <div className="p-5 border-b border-white/5 flex justify-between items-center">
                         <h3 className="text-lg font-semibold text-on-surface">Actividad Reciente</h3>
 
-                        <button className="text-on-surface-variant hover:text-primary transition-colors hover:bg-white/5 rounded-md cursor-pointer">
+                        <button className="text-on-surface-variant transition-all duration-300 hover:text-primary transition-colors hover:bg-white/5 rounded-md cursor-pointer">
                             <span className="material-symbols-outlined text-[20px]">
                                 <FontAwesomeIcon icon={faCaretDown} />
                             </span>

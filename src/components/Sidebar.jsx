@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faDolly, faGear, faLayerGroup, faPlus, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 
-export function Sidebar({ currentView, onNavigate, isOpen, onClose }) {
+export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, onClose }) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export function Sidebar({ currentView, onNavigate, isOpen, onClose }) {
                 <div className="p-6 flex items-center gap-4 border-b border-white/5">
                     <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 shrink-0">
                         <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
-                            <FontAwesomeIcon className="w-2 h-2" icon={faCartShopping} />
+                            <FontAwesomeIcon icon={faCartShopping} />
                         </span>
                     </div>
                     <div>
@@ -48,11 +48,11 @@ export function Sidebar({ currentView, onNavigate, isOpen, onClose }) {
                 </nav>
 
                 <div className="p-4 mt-auto border-t border-white/5 flex flex-col gap-4">
-                    <button className="w-full cursor-pointer bg-primary-container text-gray-200 text-sm py-2 px-4 rounded-lg font-bold hover:opacity-80 flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-300">
+                    <button onClick={() => setShowModal(true)} className="w-full cursor-pointer bg-primary-container text-gray-200 text-[0.84rem] py-2 px-2 rounded-lg font-bold hover:opacity-80 flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-300">
                         <span className="material-symbols-outlined">
                             <FontAwesomeIcon icon={faPlus} size="lg" />
                         </span>
-                        Agregar Producto
+                        Agregar Producto/Categoría
                     </button>
 
                     <div className="flex flex-col gap-1">

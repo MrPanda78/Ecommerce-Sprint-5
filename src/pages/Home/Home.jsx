@@ -1,8 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTrendUp, faCalendarDays, faCaretDown, faCartPlus, faCaretRight, faClock, faExclamation, faMoneyBills, faRotate, faTriangleExclamation, faTruckArrowRight, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendDown, faArrowTrendUp, faCalendarDays, faCaretDown, faCartPlus, faCaretRight, faClock, faDolly, faExclamation, faLayerGroup, faMoneyBills, faRotate, faTriangleExclamation, faTruckArrowRight, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function Home() {
+export default function Home({ setShowModal }) {
     const currentDate = new Date().toLocaleDateString('es-ES', {
         day: 'numeric',
         month: 'long',
@@ -21,7 +21,7 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-on-surface-variant bg-surface-container py-2 px-4 rounded-full border border-white/5 w-fit">
+                <div className="flex items-center mb-2.5 gap-2 text-xs font-semibold uppercase tracking-wider text-on-surface-variant bg-surface-container py-2 px-4 rounded-full border border-white/5 w-fit">
                     <span className="material-symbols-outlined text-[16px]">
                         <FontAwesomeIcon icon={faCalendarDays} />
                     </span>
@@ -45,23 +45,23 @@ export default function Home() {
                 icon= {faTruckArrowRight}
                 trend="Activos"
                 trendIcon= {faClock}
-                colorClass="tertiary-container"
-                />
-
-                <StatCard
-                title="Bajo Stock"
-                value="12"
-                icon= {faTriangleExclamation}
-                trend="Atención"
-                trendIcon= {faExclamation}
                 colorClass="error"
                 />
 
                 <StatCard
-                title="Nuevos Clientes"
-                value="156"
-                icon={faUserPlus}
-                trend="+4.2%"
+                title="Cantidad de Productos"
+                value="12"
+                icon= {faDolly}
+                trend="-7"
+                trendIcon={faArrowTrendDown}
+                colorClass="yellow-200"
+                />
+
+                <StatCard
+                title="Cantidad de Categorías"
+                value="6"
+                icon={faLayerGroup}
+                trend="+2"
                 trendIcon={faArrowTrendUp}
                 colorClass="secondary"
                 />
@@ -174,7 +174,7 @@ export default function Home() {
                         title="Sincronización de Catálogo"
                         desc="Actualización masiva de precios completada."
                         time="Hace 3 horas"
-                        colorClass="tertiary-container"
+                        colorClass="yellow-200"
                         />
                     </div>
 
@@ -189,28 +189,27 @@ export default function Home() {
     );
 }
 
-function StatCard({ title, value, icon, trend, trendIcon, colorClass, }) {
-    const bgColors =
-        {
+function StatCard({ title, value, icon, trend, trendIcon, colorClass }) {
+    const bgColors = {
         primary: 'bg-primary/10 text-primary',
         secondary: 'bg-secondary/10 text-secondary',
         error: 'bg-error/10 text-error',
-        'tertiary-container': 'bg-tertiary-container/10 text-tertiary-container',
-        }[colorClass] || 'bg-white/10 text-white';
+        'yellow-200': 'bg-yellow-200/10 text-yellow-200',
+    }[colorClass] || 'bg-white/10 text-white';
 
     const badgeColors =
         {
         primary: 'bg-primary/10 text-primary',
         secondary: 'bg-secondary/10 text-secondary',
         error: 'bg-error/10 text-error',
-        'tertiary-container': 'bg-white/5 text-on-surface-variant',
+        'yellow-200': 'bg-yellow-200/10 text-yellow-200',
         }[colorClass] || 'bg-white/5 text-white';
 
     const glowColors = {
-        primary: 'bg-primary/5',
-        secondary: 'bg-secondary/5',
-        error: 'bg-error/5',
-        'tertiary-container': 'bg-tertiary-container/5',
+        primary: 'bg-primary/10',
+        secondary: 'bg-secondary/10',
+        error: 'bg-error/10',
+        'yellow-200': 'bg-yellow-200/10 text-yellow-200',
     }[colorClass];
 
     return (
@@ -238,7 +237,7 @@ function StatCard({ title, value, icon, trend, trendIcon, colorClass, }) {
 
         <div className="z-10 mt-auto">
             <p className="text-on-surface-variant text-sm mb-1">{title}</p>
-            <h3 className="font-data-mono text-[28px] font-medium text-on-surface leading-none block">
+            <h3 className="font-data-mono xl:text-[28px] text-[24px] font-medium text-on-surface leading-none block">
             {value}
             </h3>
         </div>
@@ -252,7 +251,7 @@ function StatCard({ title, value, icon, trend, trendIcon, colorClass, }) {
         primary: 'bg-primary/10 text-primary',
         secondary: 'bg-secondary/10 text-secondary',
         error: 'bg-error/10 text-error',
-        'tertiary-container': 'bg-tertiary-container/10 text-tertiary-container',
+       'yellow-200': 'bg-yellow-200/10 text-yellow-200',
         }[colorClass] || 'bg-white/10 text-white';
 
     return (

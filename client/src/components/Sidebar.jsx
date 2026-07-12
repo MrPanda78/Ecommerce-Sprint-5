@@ -31,17 +31,17 @@ export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, onClose
                 </div>
 
                 <nav className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
-                    <button onClick={() => { onNavigate('dashboard'); onClose(); handleClickNavigation("/") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${currentView === 'dashboard' ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
+                    <button onClick={() => { onClose(); handleClickNavigation("/") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${location.pathname === "/" ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
                         <FontAwesomeIcon icon={faMicrosoft} size="lg" />
                         <span>Inicio</span>
                     </button>
 
-                    <button onClick={() => { onNavigate('products'); onClose(); handleClickNavigation("/products") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${currentView === 'products' ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
+                    <button onClick={() => { onClose(); handleClickNavigation("/products") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${location.pathname === "/products" ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
                         <FontAwesomeIcon icon={faDolly} size="lg" />
                         <span>Productos</span>
                     </button>
 
-                    <button onClick={() => { onNavigate('categories'); onClose(); handleClickNavigation("/categories") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${currentView === 'categories' ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
+                    <button onClick={() => { onClose(); handleClickNavigation("/categories") }} className={`flex cursor-pointer transition-all duration-300 items-center gap-3 px-4 py-3 rounded-lg transition-all active:scale-[0.98] duration-150 w-full text-left ${location.pathname === "/categories" ? 'text-primary bg-primary/10 font-bold' : 'text-on-surface-variant hover:bg-white/5'}`}>
                         <FontAwesomeIcon icon={faLayerGroup} size="lg" />
                         <span>Categorías</span>
                     </button>

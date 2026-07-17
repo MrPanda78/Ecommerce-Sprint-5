@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTrendDown, faArrowTrendUp, faCalendarDays, faCaretDown, faCartPlus, faCaretRight, faClock, faDolly, faExclamation, faLayerGroup, faMoneyBills, faRotate, faTriangleExclamation, faTruckArrowRight, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendDown, faArrowTrendUp, faCalendarDays, faCaretDown, faCartPlus, faCaretRight, faClock, faDolly, faLayerGroup, faMoneyBills, faRotate, faTriangleExclamation, faTruckArrowRight, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home({ setShowModal }) {
     const currentDate = new Date().toLocaleDateString('es-ES', {

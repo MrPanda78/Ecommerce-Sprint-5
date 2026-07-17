@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faDolly, faGear, faLayerGroup, faPlus, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 
-export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, onClose }) {
+export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, setTypeModal, setTitleModal, setDescriptionModal, onClose }) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -13,6 +13,13 @@ export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, onClose
             navigate(path);
         }
     };
+
+    const handleModal = () => {
+        setShowModal(true);
+        setTypeModal("create");
+        setTitleModal("Agregar Producto/Categoría");
+        setDescriptionModal("Completa los datos para agregar un nuevo producto o crear una nueva categoría.");
+    }
 
     return (
         <>
@@ -48,7 +55,7 @@ export function Sidebar({ currentView, onNavigate, isOpen, setShowModal, onClose
                 </nav>
 
                 <div className="p-4 mt-auto border-t border-white/5 flex flex-col gap-4">
-                    <button onClick={() => setShowModal(true)} className="w-full cursor-pointer bg-primary-container text-gray-200 text-[0.84rem] py-2 px-2 rounded-lg font-bold hover:opacity-80 flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-300">
+                    <button onClick={() => handleModal()} className="w-full cursor-pointer bg-primary-container text-gray-200 text-[0.84rem] py-2 px-2 rounded-lg font-bold hover:opacity-80 flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-300">
                         <span className="material-symbols-outlined">
                             <FontAwesomeIcon icon={faPlus} size="lg" />
                         </span>

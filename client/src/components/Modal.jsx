@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faTriangleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const Modal = ({ type, title, description, product, onClose }) => {
+const Modal = ({ type, title, description, product, setReloadProducts, onClose }) => {
     // --- Estados para el body ---
     const [addType, setAddType] = useState(''); // 'Product' | 'Category'
     const [showAddType, setShowAddType] = useState(false);
@@ -26,9 +26,70 @@ const Modal = ({ type, title, description, product, onClose }) => {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
 
+    const categoryLabels = {
+        beverages: "Bebidas",
+        electronic: "Electrónica",
+        food: "Comida"
+    };
+
     const handleClick = (e) => {
         if (!e.target.closest('.modal')) {
             onClose();
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/products/${product.id}/delete`, { method: "DELETE" });
+
+            if (!response.ok) {
+                throw new Error("No se pudo eliminar el producto");
+            }
+            setReloadProducts(prev => prev + 1);
+            onClose();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleSave = async () => {
+        try {
+            const categoryMap = {
+                beverages: 1,
+                electronic: 2,
+                food: 3
+            };
+
+            const body = {
+                name,
+                description: descriptions,
+                category_id: categoryMap[category],
+                points: price,
+                stock
+            };
+
+            const response = await fetch(
+                `http://localhost:3001/products/${product.id}/edit`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("No se pudo actualizar el producto");
+            }
+            setReloadProducts(prev => prev + 1);
+
+            onClose();
+
+        }
+        catch (err) {
+            console.error(err);
         }
     };
 
@@ -67,7 +128,7 @@ const Modal = ({ type, title, description, product, onClose }) => {
                             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-600 to-transparent rounded-t-2xl"></div>
 
                             {/* Header */}
-                            <div className="flex items-start justify-between p-5 border-b border-zinc-800">
+                            <div className={`flex items-start justify-between ${type === "delete" ? "px-5 pt-5" : "p-5 border-b border-zinc-800"}`}>
                                 <div className="flex items-center gap-3">
                                     <div className={`w-10 h-10 rounded-lg ${type === "delete" ? "bg-red-400/20" : "bg-primary/20"} flex items-center justify-center border ${type === "delete" ? "border-red-400/30" : "border-primary/30"} shrink-0`}>
                                         { type === "delete" ? (
@@ -97,7 +158,7 @@ const Modal = ({ type, title, description, product, onClose }) => {
                             </div>
 
                             {/* Body */}
-                            <div className="p-5">
+                            <div className={`${type === "delete" ? "px-5 pb-5" : "p-5"}`}>
                                 <div className="space-y-3">
                                     {type == "edit" ? (
                                         <div className="space-y-4">
@@ -118,7 +179,12 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                                     Nombre
                                                 </label>
 
-                                                <input defaultValue={name} onChange={(e) => setName(e.target.value)} className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-xl text-zinc-100 text-sm"/>
+                                                <input
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    required
+                                                    className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-xl text-zinc-100 text-sm"
+                                                />
                                             </div>
 
                                             {/* Descripción */}
@@ -127,7 +193,12 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                                     Descripción
                                                 </label>
 
-                                                <textarea defaultValue={descriptions} rows={4} onChange={(e) => setDescriptions(e.target.value)} className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-xs text-zinc-100 focus:outline-none transition-all resize-none"/>
+                                                <textarea
+                                                    value={descriptions}
+                                                    rows={4}
+                                                    onChange={(e) => setDescriptions(e.target.value)}
+                                                    className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-xs text-zinc-100 focus:outline-none transition-all resize-none"
+                                                />
                                             </div>
 
                                             {/* Categoría */}
@@ -136,7 +207,15 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                                     Categoría
                                                 </label>
 
-                                                <input type="text" defaultValue={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"/>
+                                                <select
+                                                    value={category}
+                                                    onChange={(e) => setCategory(e.target.value)}
+                                                    className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"
+                                                >
+                                                    {Object.entries(categoryLabels).map(([value, label]) => (
+                                                        <option key={value} value={value} className="bg-zinc-800">{label}</option>
+                                                    ))}
+                                                </select>
                                             </div>
 
                                             {/* Precio y Stock */}
@@ -146,7 +225,14 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                                         Precio
                                                     </label>
 
-                                                    <input type="number" defaultValue={price} onChange={(e) => setPrice(e.target.value)} className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"/>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        step="1"
+                                                        value={price}
+                                                        onChange={(e) => setPrice(parseInt(e.target.value) || 0)}
+                                                        className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"
+                                                    />
                                                 </div>
 
                                                 <div>
@@ -154,7 +240,14 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                                         Stock
                                                     </label>
 
-                                                    <input type="number" defaultValue={stock} onChange={(e) => setStock(e.target.value)} className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"/>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        step="1"
+                                                        value={stock}
+                                                        onChange={(e) => setStock(parseInt(e.target.value) || 0)}
+                                                        className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-zinc-500 rounded-xl text-sm text-zinc-100 focus:outline-none transition-all"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -330,6 +423,7 @@ const Modal = ({ type, title, description, product, onClose }) => {
                                         Cancelar
                                     </button>
                                     <button
+                                        onClick={type === "delete" ? handleDelete : type === "edit" ? handleSave : undefined}
                                         className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white text-zinc-900 ${type === "delete" ? "hover:bg-red-400" : "hover:bg-zinc-200"} transition-all duration-300 cursor-pointer`}
                                     >
                                         {type == "edit" ? (

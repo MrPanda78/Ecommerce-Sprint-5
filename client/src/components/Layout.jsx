@@ -14,6 +14,7 @@ export default function Layout({ children }) {
     const [titleModal, setTitleModal] = useState("");
     const [descriptionModal, setDescriptionModal] = useState("");
     const [productModal, setProductModal] = useState(null);
+    const [reloadProducts, setReloadProducts] = useState(0);
 
     return (
         <div className="flex h-screen overflow-hidden w-full bg-background relative">
@@ -23,12 +24,12 @@ export default function Layout({ children }) {
                 <Header currentView={currentView} onNavigate={setCurrentView} title={"Fooddy Shop"} onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
                 
                 <main className="flex-1 overflow-y-auto pt-20 px-4 md:px-8 pb-12 w-full max-w-7xl mx-auto scroll-smooth">
-                    <Outlet context={{ setShowModal, setTypeModal, setTitleModal, setDescriptionModal, setProductModal }} />
+                    <Outlet context={{ setShowModal, setTypeModal, setTitleModal, setDescriptionModal, setProductModal, reloadProducts }} />
                 </main>
             </div>
 
             { showModal && ReactDOM.createPortal(
-                <Modal title={titleModal} description={descriptionModal} type={typeModal} product={productModal} onClose={() => setShowModal(false)} />, document.body)
+                <Modal title={titleModal} description={descriptionModal} type={typeModal} product={productModal} setReloadProducts={setReloadProducts} onClose={() => setShowModal(false)} />, document.body)
             }
 
         </div>

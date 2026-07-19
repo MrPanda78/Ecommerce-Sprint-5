@@ -26,7 +26,7 @@ const Categories = () => {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                 <div>
-                    <h1 className="font-display-lg text-3xl font-bold text-on-surface mb-1">Gestión de Categorías</h1>
+                    <h2 className="font-display-lg text-3xl font-bold text-on-surface tracking-tight">Gestión de Categorías</h2>
                     <p className="text-on-surface-variant text-sm">Organiza y administra la estructura del catálogo.</p>
                 </div>
             </div>

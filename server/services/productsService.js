@@ -1,6 +1,13 @@
 const db = require("../db/database");
 
 const productsService = {
+    deleteProduct(id) {
+        return db.prepare(`
+            DELETE FROM products
+            WHERE id = ?
+        `).run(id);
+    },
+
     getAllProducts() {
         return db.prepare(`
             SELECT products.*, categories.name AS category
@@ -92,7 +99,27 @@ const productsService = {
                 ON products.category_id = categories.id
             WHERE LOWER(products.name) LIKE '%' || LOWER(?) || '%';
         `).all(buscar);
-    }
+    },
+
+    updateProduct(id, product) {
+        return db.prepare(`
+            UPDATE products
+            SET
+                name = ?,
+                description = ?,
+                category_id = ?,
+                points = ?,
+                stock = ?
+            WHERE id = ?
+        `).run(
+            product.name,
+            product.description,
+            product.category_id,
+            product.points,
+            product.stock,
+            id
+        );
+    },
 };
 
 module.exports = productsService;

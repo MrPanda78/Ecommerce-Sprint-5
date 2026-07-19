@@ -28,7 +28,8 @@ const Products = () => {
         setTypeModal,
         setTitleModal,
         setDescriptionModal,
-        setProductModal
+        setProductModal,
+        reloadProducts
     } = useOutletContext();
 
     const filteredProducts = products.filter(product => {
@@ -71,14 +72,15 @@ const Products = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    const loadProducts = async () => {
+        const response = await fetch("http://localhost:3001/products");
+        const data = await response.json();
+        setProducts(data);
+    };
+
     useEffect(() => {
-        const loadProducts = async () => {
-            const response = await fetch("http://localhost:3001/products");
-            const data = await response.json();
-            setProducts(data);
-        };
         loadProducts();
-    }, []);
+    }, [reloadProducts]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -190,6 +192,7 @@ const Products = () => {
                                     {currentProducts.map(product => (
                                         <ProductRow
                                             key={product.id}
+                                            id={product.id}
                                             product={product}
                                             img={`products/${product.category}/` + product.image}
                                             name={product.name}
@@ -276,8 +279,7 @@ const Products = () => {
     );
 }
 
-const ProductRow = ({ product, img, isPlaceholder, imgClass = "", rowClass = "", name, sku, category, stock, stockClass = "text-on-surface", price, status, statusClass, setShowModal, setTypeModal, setTitleModal, setDescriptionModal, setProductModal }) => {
-    
+const ProductRow = ({ id, product, img, isPlaceholder, imgClass = "", rowClass = "", name, sku, category, stock, stockClass = "text-on-surface", price, status, statusClass, setShowModal, setTypeModal, setTitleModal, setDescriptionModal, setProductModal }) => {
     const handleModal = (type, title, description, product) => {
         setShowModal(true);
         setTypeModal(type);
@@ -285,6 +287,12 @@ const ProductRow = ({ product, img, isPlaceholder, imgClass = "", rowClass = "",
         setDescriptionModal(description);
         setProductModal(product);
     }
+
+    const categoryLabels = {
+        beverages: "Bebidas",
+        electronic: "Electrónica",
+        food: "Comida"
+    };
     
     return (
         <tr className={`table-row-hover transition-colors group ${rowClass}`}>
@@ -305,7 +313,7 @@ const ProductRow = ({ product, img, isPlaceholder, imgClass = "", rowClass = "",
                 <div className="font-medium text-on-surface">{name}</div>
                 <div className="text-on-surface-variant text-xs mt-0.5 font-data-mono">{sku}</div>
             </td>
-            <td className="p-4 text-on-surface-variant">{category}</td>
+            <td className="p-4 text-on-surface-variant">{categoryLabels[category]}</td>
             <td className={`p-4 text-right font-data-mono ${stockClass}`}>{stock}</td>
             <td className="p-4 text-right font-data-mono text-on-surface">{price}</td>
             <td className="p-4 text-center">
@@ -315,12 +323,12 @@ const ProductRow = ({ product, img, isPlaceholder, imgClass = "", rowClass = "",
             </td>
             <td className="p-4">
                 <div className="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => handleModal("edit", "Modificar Producto", "Realiza cambios en la información del producto y actualízala en el catálogo.", product)} className="cursor-pointer text-on-surface-variant hover:text-primary transition-colors p-1" title="Editar">
+                    <button onClick={() => handleModal("edit", `Modificar Producto #${id}`, "Realiza cambios en la información del producto y actualízala en el catálogo.", product)} className="cursor-pointer text-on-surface-variant hover:text-primary transition-colors p-1" title="Editar">
                         <span className="material-symbols-outlined text-[20px]">
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </span>
                     </button>
-                    <button onClick={() => handleModal("delete", "Eliminar Producto", "¿Estás seguro de eliminar este producto?. Una vez eliminado no podrá recuperarse.", product)} className="cursor-pointer text-on-surface-variant hover:text-red-300 transition-colors p-1" title="Eliminar">
+                    <button onClick={() => handleModal("delete", `Modificar Producto #${id}`, "¿Estás seguro de eliminar este producto?. Una vez eliminado no podrá recuperarse.", product)} className="cursor-pointer text-on-surface-variant hover:text-red-300 transition-colors p-1" title="Eliminar">
                         <span className="material-symbols-outlined text-[20px]">
                             <FontAwesomeIcon icon={faTrashCan} />
                         </span>
